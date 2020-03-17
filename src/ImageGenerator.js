@@ -1,25 +1,16 @@
 import React, { Component } from "react";
+const url = "https://cataas.com/cat/";
 
 class ImageGenerator extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       imageTag: "",
-      defaultImg: ""
+      defaultImg: url
     };
     this.handleEvent = this.handleEvent.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    var url = "https://cataas.com/cat/" + this.state.imageTag;
-    fetch(url)
-      .then(res => res.json())
-      .then(response => {
-        //const { cats } = response.data;
-        //console.log(cats);
-        this.setState({ defaultImg: response });
-      });
   }
 
   handleEvent(event) {
@@ -28,8 +19,8 @@ class ImageGenerator extends Component {
   }
 
   handleSubmit(event) {
-    alert("A preference was submitted: " + this.state.imageTag);
-    this.componentDidMount();
+    this.setState({ defaultImg: url + this.state.imageTag });
+    console.log(this.state.defaultImg);
     event.preventDefault();
   }
   render() {
